@@ -16,6 +16,12 @@ A bootstrap library for Django projects with:
 pip install django-base-kit
 ```
 
+For local development from a clone:
+
+```bash
+pip install -e ".[dev]"
+```
+
 ## What this package provides
 
 ### 1) Reusable BaseModel
@@ -72,6 +78,8 @@ The package already includes forms, views, and templates for:
 Routes are exposed through `django_base_kit.urls.user_urlpatterns`.
 
 ## Consumer project setup
+
+The repository also contains a small `core/` Django project used as a local example for development. It is not included in the published package; only the `django_base_kit` reusable app is packaged.
 
 ### 1) `settings.py`
 
