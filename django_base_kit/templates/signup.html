@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+{% load widget_tweaks %}
+<style>
+    .basekit-shell {
+        max-width: 640px;
+        margin: 2rem auto;
+        padding: 1.25rem;
+        border: 1px solid #d4d4d4;
+        border-radius: 8px;
+        background: #fafafa;
+        color: #222;
+    }
+    .basekit-title {
+        margin-bottom: 0.4rem;
+        font-size: 1.4rem;
+    }
+    .basekit-subtitle {
+        margin-bottom: 1rem;
+        color: #555;
+    }
+    .basekit-row {
+        margin-bottom: 0.85rem;
+    }
+    .basekit-row label {
+        display: block;
+        margin-bottom: 0.35rem;
+    }
+    .basekit-input input {
+        width: 100%;
+        padding: 0.55rem 0.65rem;
+        border: 1px solid #bdbdbd;
+        border-radius: 6px;
+        background: #fff;
+        color: #222;
+    }
+    .basekit-error {
+        margin-bottom: 1rem;
+        padding: 0.65rem;
+        border: 1px solid #c9c9c9;
+        border-radius: 6px;
+        background: #f3f3f3;
+    }
+    .basekit-button {
+        width: 100%;
+        padding: 0.6rem 0.75rem;
+        border: 1px solid #8a8a8a;
+        border-radius: 6px;
+        background: #efefef;
+        color: #222;
+        cursor: pointer;
+    }
+    .basekit-warning {
+        max-width: 640px;
+        margin: 2rem auto;
+        padding: 1rem;
+        border: 1px solid #d4d4d4;
+        border-radius: 8px;
+        background: #fafafa;
+    }
+</style>
+
+{% if 'admin' in user_permission_groups %}
+    <div class="basekit-shell">
+        <h2 class="basekit-title">Cadastrar novo usuário</h2>
+        <p class="basekit-subtitle">Preencha os campos abaixo para criar um novo usuário.</p>
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="basekit-error">
+                    {% for field, error_list in form.errors.items %}
+                        {% for error in error_list %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% for field in form %}
+                <div class="basekit-row">
+                    {{ field.label_tag }}
+                    <div class="basekit-input">
+                        {% render_field field %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div>
+                <button class="basekit-button" type="submit" id="submit_button">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+{% else %}
+    <div class="basekit-warning">Você não tem permissão para acessar essa parte do sistema.</div>
+{% endif %}
+{% endblock content %}

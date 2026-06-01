@@ -1,0 +1,3 @@
+include LICENSE
+include README.md
+recursive-include django_base_kit/templates *.html
